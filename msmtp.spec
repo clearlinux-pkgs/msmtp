@@ -6,7 +6,7 @@
 #
 Name     : msmtp
 Version  : 1.6.6
-Release  : 16
+Release  : 17
 URL      : http://downloads.sourceforge.net/project/msmtp/msmtp/1.6.6/msmtp-1.6.6.tar.xz
 Source0  : http://downloads.sourceforge.net/project/msmtp/msmtp/1.6.6/msmtp-1.6.6.tar.xz
 Source99 : http://downloads.sourceforge.net/project/msmtp/msmtp/1.6.6/msmtp-1.6.6.tar.xz.sig
