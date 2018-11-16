@@ -6,16 +6,17 @@
 #
 Name     : msmtp
 Version  : 1.6.6
-Release  : 18
+Release  : 19
 URL      : http://downloads.sourceforge.net/project/msmtp/msmtp/1.6.6/msmtp-1.6.6.tar.xz
 Source0  : http://downloads.sourceforge.net/project/msmtp/msmtp/1.6.6/msmtp-1.6.6.tar.xz
 Source99 : http://downloads.sourceforge.net/project/msmtp/msmtp/1.6.6/msmtp-1.6.6.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-3.0
-Requires: msmtp-bin
-Requires: msmtp-doc
-Requires: msmtp-locales
+Requires: msmtp-bin = %{version}-%{release}
+Requires: msmtp-license = %{version}-%{release}
+Requires: msmtp-locales = %{version}-%{release}
+Requires: msmtp-man = %{version}-%{release}
 BuildRequires : pkgconfig(gnutls)
 BuildRequires : pkgconfig(libidn)
 BuildRequires : pkgconfig(openssl)
@@ -27,6 +28,8 @@ In the default mode, it transmits a mail to an SMTP server.
 %package bin
 Summary: bin components for the msmtp package.
 Group: Binaries
+Requires: msmtp-license = %{version}-%{release}
+Requires: msmtp-man = %{version}-%{release}
 
 %description bin
 bin components for the msmtp package.
@@ -35,9 +38,18 @@ bin components for the msmtp package.
 %package doc
 Summary: doc components for the msmtp package.
 Group: Documentation
+Requires: msmtp-man = %{version}-%{release}
 
 %description doc
 doc components for the msmtp package.
+
+
+%package license
+Summary: license components for the msmtp package.
+Group: Default
+
+%description license
+license components for the msmtp package.
 
 
 %package locales
@@ -48,34 +60,47 @@ Group: Default
 locales components for the msmtp package.
 
 
+%package man
+Summary: man components for the msmtp package.
+Group: Default
+
+%description man
+man components for the msmtp package.
+
+
 %prep
 %setup -q -n msmtp-1.6.6
 
 %build
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1489894643
-export CFLAGS="$CFLAGS -fstack-protector-strong "
-export FCFLAGS="$CFLAGS -fstack-protector-strong "
-export FFLAGS="$CFLAGS -fstack-protector-strong "
-export CXXFLAGS="$CXXFLAGS -fstack-protector-strong "
+export SOURCE_DATE_EPOCH=1542405187
+export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export CXXFLAGS="$CXXFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 %configure --disable-static
-make V=1  %{?_smp_mflags}
+make  %{?_smp_mflags}
 
 %check
 export LANG=C
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
-export no_proxy=localhost
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1489894643
+export SOURCE_DATE_EPOCH=1542405187
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/msmtp
+cp COPYING %{buildroot}/usr/share/package-licenses/msmtp/COPYING
 %make_install
 %find_lang msmtp
-## make_install_append content
+## install_append content
 ln -s msmtp %{buildroot}%{_bindir}/sendmail
-## make_install_append end
+## install_append end
 
 %files
 %defattr(-,root,root,-)
@@ -86,9 +111,16 @@ ln -s msmtp %{buildroot}%{_bindir}/sendmail
 /usr/bin/sendmail
 
 %files doc
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 %doc /usr/share/info/*
-%doc /usr/share/man/man1/*
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/msmtp/COPYING
+
+%files man
+%defattr(0644,root,root,0755)
+/usr/share/man/man1/msmtp.1
 
 %files locales -f msmtp.lang
 %defattr(-,root,root,-)
