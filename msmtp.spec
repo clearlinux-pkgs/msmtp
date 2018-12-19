@@ -6,10 +6,10 @@
 #
 Name     : msmtp
 Version  : 1.6.6
-Release  : 19
-URL      : http://downloads.sourceforge.net/project/msmtp/msmtp/1.6.6/msmtp-1.6.6.tar.xz
-Source0  : http://downloads.sourceforge.net/project/msmtp/msmtp/1.6.6/msmtp-1.6.6.tar.xz
-Source99 : http://downloads.sourceforge.net/project/msmtp/msmtp/1.6.6/msmtp-1.6.6.tar.xz.sig
+Release  : 20
+URL      : https://sourceforge.net/projects/msmtp/files/msmtp/1.6.6/msmtp-1.6.6.tar.xz
+Source0  : https://sourceforge.net/projects/msmtp/files/msmtp/1.6.6/msmtp-1.6.6.tar.xz
+Source99 : https://sourceforge.net/projects/msmtp/files/msmtp/1.6.6/msmtp-1.6.6.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-3.0
@@ -76,7 +76,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1542405187
+export SOURCE_DATE_EPOCH=1545263290
 export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -92,7 +92,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1542405187
+export SOURCE_DATE_EPOCH=1545263290
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/msmtp
 cp COPYING %{buildroot}/usr/share/package-licenses/msmtp/COPYING
