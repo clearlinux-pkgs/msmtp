@@ -1,4 +1,3 @@
-Configure miss: libgsasl
 Configure miss: whether libidn is needed for IDN support
 Configure miss: libsecret
 Configure miss: SecKeychainGetVersion

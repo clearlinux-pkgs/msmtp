@@ -1,3 +1,1201 @@
+commit 232766492b4a88da60c89bdcf4511d8a3d5a92e0
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2019-02-11 20:31:38 +0100
+
+    Bump version to 1.8.3
+
+ configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 76cc76ee8fd637f6906f2b10838d59e20158fe3b
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2019-02-11 20:30:43 +0100
+
+    Improve output for certificate verification failure.
+
+ src/tls.c | 24 ++++++++++++++++++------
+ 1 file changed, 18 insertions(+), 6 deletions(-)
+
+commit a81d0a5126304f9f8b29a75d058044dc67d07663
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2019-02-11 20:27:34 +0100
+
+    Fix GnuTLS certificate verification for special tls_trust_file 'system'.
+
+ src/tls.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 51179e214669300e98b3e6af5b857092128d8c35
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2019-02-11 19:59:32 +0100
+
+    Implement special tls_trust_file 'system' for OpenSSL.
+
+ src/tls.c | 34 ++++++++++++++++++++--------------
+ 1 file changed, 20 insertions(+), 14 deletions(-)
+
+commit 9f9948732a0153a54f7324873fdb5cafbcd9d2d6
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2019-01-15 14:35:35 +0100
+
+    Fix misleading error message about account that is already defined.
+    
+    This closes https://gitlab.marlam.de/marlam/msmtp/issues/26.
+
+ src/conf.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+commit 1590e2d705fbfb5b07836d2509e46b7a4a7c8417
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2019-01-12 17:20:06 +0100
+
+    Bump version to 1.8.2
+
+ configure.ac | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 3d8b2df4b598c1dd920792920eb1cdacbec4f51b
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2019-01-12 17:18:21 +0100
+
+    Update translations from translation project.
+
+ po/LINGUAS  |    1 +
+ po/de.po    | 1592 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++--------------------------------------------------------------------
+ po/fr.po    | 1122 ++++++++++++++++++++++++++++++++++++++++++++++++++----------------------------------------------
+ po/pt_BR.po | 1981 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++------------------------------------------------------------------
+ po/uk.po    | 1645 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 5 files changed, 4220 insertions(+), 2121 deletions(-)
+
+commit 520b03d34f5f6a49f1a08c3491f23344d2505f8d
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2019-01-12 17:00:34 +0100
+
+    Fix uninitialized-value error, found by scan-build
+
+ src/msmtp.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 90cacf45ba15ad999131bc4074132d9c362f8432
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2019-01-12 16:52:42 +0100
+
+    Silence compiler warning.
+
+ src/password.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+commit e1d3a7dd4ce45a69bbe3af83b6af3aec82a1b21f
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2019-01-11 19:49:53 +0100
+
+    Move password_get() to its own module to share it with mpop
+
+ src/Makefile.am |   3 ++-
+ src/msmtp.c     | 165 ++--------------------------------------------------------------------------------------------------------------------------
+ src/password.c  | 221 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ src/password.h  |  45 ++++++++++++++++++++++++++++++++++
+ 4 files changed, 270 insertions(+), 164 deletions(-)
+
+commit 457d5eb2ae2140e0e4cf35997c4daa480c0bf877
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2019-01-11 19:18:36 +0100
+
+    Move exit code helper function to modules shared with mpop
+
+ src/msmtp.c | 208 +++++++++++++++++++++++++++-----------------------------------------------------------------------------------------------------------------------------------------------
+ src/net.c   |  28 +++++++++++++++++++++++
+ src/net.h   |   9 +++++++-
+ src/smtp.c  |  31 +++++++++++++++++++++++++-
+ src/smtp.h  |   9 +++++++-
+ src/tls.c   |  29 +++++++++++++++++++++++-
+ src/tls.h   |   7 ++++++
+ src/tools.c |  48 ++++++++++++++++++++++++++++++++++++++++
+ src/tools.h |   7 ++++++
+ 9 files changed, 196 insertions(+), 180 deletions(-)
+
+commit dd4d66954ce270a2303de687c3487944a9970b1d
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2019-01-11 19:06:31 +0100
+
+    Move tls_print_info() to tls.c (shared with mpop)
+
+ src/msmtp.c | 89 +++++------------------------------------------------------------------------------------
+ src/tls.c   | 77 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ src/tls.h   | 10 +++++++++-
+ src/tools.c |  2 +-
+ src/tools.h |  2 +-
+ 5 files changed, 93 insertions(+), 87 deletions(-)
+
+commit ed6d2262f410837edab1e08c05c1d7703cc3d158
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2019-01-11 18:55:33 +0100
+
+    Move print_fingerprint() to tools.c (shared with mpop)
+
+ src/msmtp.c | 25 +++++--------------------
+ src/tools.c | 20 ++++++++++++++++++++
+ src/tools.h |  9 +++++++++
+ 3 files changed, 34 insertions(+), 20 deletions(-)
+
+commit 60683f1f5e58e065be314e7ee31f7f79a7c84215
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2019-01-11 18:50:23 +0100
+
+    Whitespace changes
+
+ src/tools.c | 3 +++
+ src/tools.h | 3 ---
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+commit 439dbcd6c467df5c2e5f05eb5b337ee4b9474f5c
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2019-01-11 18:47:11 +0100
+
+    Move sanitize_string() to tools.c (shared with mpop)
+
+ src/msmtp.c | 87 ++++++++++++++++++++++++++++++++-------------------------------------------------------
+ src/tools.c | 23 +++++++++++++++++++++++
+ src/tools.h |  7 +++++++
+ 3 files changed, 62 insertions(+), 55 deletions(-)
+
+commit 4e56b1fad5c68dadc25182ac0024ef5e98b14074
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2019-01-11 18:46:43 +0100
+
+    Remove unused variable.
+
+ src/tools.c | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit 86c0c40ee20049fa6dd62c4651892df0a7bd2171
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2019-01-10 21:11:45 +0100
+
+    Move functions shared by msmtp and mpop to tools.c, and fix check_hostname_matches_domain()
+
+ src/msmtp.c | 66 +++++-------------------------------------------------------------
+ src/tools.c | 68 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-
+ src/tools.h | 21 ++++++++++++++++++++-
+ 3 files changed, 92 insertions(+), 63 deletions(-)
+
+commit d1a4dd7b6279f99993fc8f45e39345725427a880
+Author: Simon Deziel <simon@sdeziel.info>
+Date:   2019-01-08 19:44:13 -0500
+
+    Fix typo: s/occurence/occurrence
+    
+    Signed-off-by: Simon Deziel <simon@sdeziel.info>
+
+ doc/msmtp.texi | 2 +-
+ doc/msmtpd.1   | 2 +-
+ src/msmtpd.c   | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+commit a0d20d3d9ef8315c14b399f0e0ea1a4b6c2cb41f
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2019-01-04 21:58:41 +0100
+
+    Improve --help text
+
+ src/msmtp.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+commit 108028d14342ec44f21f62c06acf4d48c01f9274
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2019-01-04 11:09:18 +0100
+
+    Fix handling of realloc failure in msmtpd; found by cppcheck
+
+ src/msmtpd.c | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
+
+commit 10196baa543ee0e71d03f5549aeb631c01096b4b
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2019-01-04 06:46:58 +0100
+
+    Add missing #include <limits.h>
+
+ src/net.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+commit 358994b44a997a0874470689313c8bf22a370232
+Author: Matthias Strubel <>
+Date:   2019-01-02 20:37:33 +0100
+
+    Fix misbehaviour of grep in find_alias_for_msmtp.sh
+    
+    See https://gitlab.marlam.de/marlam/msmtp/issues/23
+
+ scripts/find_alias/find_alias_for_msmtp.sh | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 0fb3ed9aaee0b9a63f4e5358c960fe39a6bb220c
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2019-01-02 20:29:28 +0100
+
+    Bump version to 1.8.2rc3
+
+ configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit fedc654accbe04f5bdf12c11b8680677cb98acd1
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2019-01-02 20:28:56 +0100
+
+    Bump copyright year
+
+ doc/msmtp.1    | 4 ++--
+ doc/msmtp.texi | 2 +-
+ src/msmtp.c    | 2 +-
+ 3 files changed, 4 insertions(+), 4 deletions(-)
+
+commit 8d71f1e1d930e6892ad391badf391f25ea072777
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2019-01-01 20:04:08 +0100
+
+    Tweak --configure output.
+
+ src/msmtp.c | 17 ++++++++++++++---
+ 1 file changed, 14 insertions(+), 3 deletions(-)
+
+commit 71a34b00db8979fa1c299d3da89e642388a7a8f0
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-12-31 15:29:15 +0100
+
+    Add a new option --configure for automatic configuration based on SRV records.
+
+ NEWS           |   3 +++
+ configure.ac   |  36 +++++++++++++++++++++++++++++++++-
+ doc/msmtp.1    |  12 +++++++++++-
+ doc/msmtp.texi |  12 ++++++++++++
+ src/msmtp.c    | 180 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ src/net.c      |  89 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ src/net.h      |  24 +++++++++++++++++++++++
+ 7 files changed, 354 insertions(+), 2 deletions(-)
+
+commit b910c7d49e69aa22acf5c6c1bdf5e0cb0a1979ad
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-12-16 16:50:11 +0100
+
+    Reactivate the pt_BR translation.
+
+ po/LINGUAS | 1 +
+ 1 file changed, 1 insertion(+)
+
+commit 1a1f73e1784cee71594cbfa1d293a94a139f2044
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-12-13 16:19:11 +0100
+
+    Bump version to 1.8.2r1
+
+ configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 7defbce020f7053039904356560b8c5c8af30877
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-12-13 16:03:51 +0100
+
+    Add TRANSLATORS comment pointing to mpop, and make sure it appears first.
+
+ po/POTFILES.in | 4 ++--
+ src/msmtp.c    | 2 ++
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+commit 84982c9a699cb072cccfce95b96ebb521526ad11
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-12-13 15:49:28 +0100
+
+    Add a common comment to files shared by msmtp and mpop.
+
+ src/list.c    | 2 +-
+ src/list.h    | 2 +-
+ src/net.c     | 2 +-
+ src/net.h     | 2 +-
+ src/readbuf.c | 2 +-
+ src/readbuf.h | 2 +-
+ src/stream.c  | 2 +-
+ src/stream.h  | 2 +-
+ src/tools.c   | 2 +-
+ src/tools.h   | 2 +-
+ src/xalloc.c  | 4 ++--
+ src/xalloc.h  | 4 ++--
+ 12 files changed, 14 insertions(+), 14 deletions(-)
+
+commit 37371fa07729bfc11761b6d11befd7271528090d
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-12-13 10:20:08 +0100
+
+    Change tls_trust_file to have the new default value "system".
+    
+    To simplify TLS setup, the tls_trust_file command has a new default value
+    'system' that selects the system default trust. Now you just need tls=on to
+    use TLS; the other TLS options are only required in special cases.
+    To make this work without breaking compatibility with older msmtp versions,
+    tls_fingerprint now overrides tls_trust_file, and tls_certcheck=off overrides
+    both (previously, you could not specify contradicting options).
+
+ NEWS                       |  8 ++++++++
+ doc/msmtp.1                | 44 ++++++++++++++++++++------------------------
+ doc/msmtp.texi             | 42 +++++++++++++++++++-----------------------
+ doc/msmtprc-system.example |  1 -
+ doc/msmtprc-user.example   | 15 +++++++--------
+ src/conf.c                 | 22 ----------------------
+ src/msmtp.c                |  4 ++++
+ src/tls.c                  | 64 ++++++++++++++++++++++++++++++++++++++++++++--------------------
+ 8 files changed, 102 insertions(+), 98 deletions(-)
+
+commit 7946d7e8d4840590439f832cef7b30a9c7a6a35c
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-12-12 23:59:49 +0100
+
+    Sync ABOUT-NLS with latest gettext version
+
+ ABOUT-NLS | 1396 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 1379 insertions(+), 17 deletions(-)
+
+commit 6df144cddf849651e47cdcbb3a964b1fb6ef9c71
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-12-12 23:51:10 +0100
+
+    Sync netrc code with latest fetchmail version
+
+ src/msmtp.c |   4 ++--
+ src/netrc.c | 189 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-----------------------------------------------
+ src/netrc.h |  51 +++++++++++++++++++++++-----------------------
+ 3 files changed, 165 insertions(+), 79 deletions(-)
+
+commit 6f647cc26c5a75f967439a8fdf21a19840aac3b4
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-12-12 23:31:02 +0100
+
+    Sync gettext.h with latest gettext
+
+ src/gettext.h | 48 ++++++++++++++++++++++++++++++------------------
+ 1 file changed, 30 insertions(+), 18 deletions(-)
+
+commit bafa9a329762da875d683cd45f2b72402d8443c1
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-12-12 23:23:24 +0100
+
+    Sync md5 code with latest openwall version
+
+ src/md5.c | 108 ++++++++++++++++++++++++++++++++++++++++++++++++++++--------------------------------------------------------
+ src/md5.h |   2 +-
+ 2 files changed, 53 insertions(+), 57 deletions(-)
+
+commit 908b4c33d471eabc57e9370985e91d0148483d4d
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-12-12 23:15:05 +0100
+
+    Sync base64 code with latest gnulib version
+
+ src/base64.c | 62 ++++++++++++++++++++++++++++++++++++++++++++++----------------
+ src/base64.h | 13 ++++++++++---
+ 2 files changed, 56 insertions(+), 19 deletions(-)
+
+commit 87d1bdafb843bc00c231dae34036f53683713539
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-12-11 19:13:21 +0100
+
+    Do not call gnutls_free() needlessly.
+    
+    Since we never call gnutls_global_set_mem_functions(), it is always the default
+    free() function.
+
+ src/tls.c | 11 +----------
+ 1 file changed, 1 insertion(+), 10 deletions(-)
+
+commit 86e1513a182dbe14f0a2817cd95a2dbac48be846
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-12-10 23:11:50 +0100
+
+    Add TLS session parameters to printed TLS info
+
+ src/msmtp.c | 56 ++++++++++++++++++++++++++++++++++++--------------------
+ src/smtp.c  |  4 ++--
+ src/smtp.h  |  2 +-
+ src/tls.c   | 19 ++++++++++++++++++-
+ src/tls.h   |  7 +++++--
+ 5 files changed, 62 insertions(+), 26 deletions(-)
+
+commit 5599cfb51488928147f95e9d0926aa3538b305dc
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-12-10 22:26:30 +0100
+
+    Remove obsolete certificate verification flag that does nothing.
+
+ src/tls.c | 2 --
+ 1 file changed, 2 deletions(-)
+
+commit 0ac7eafb8336f048ec1c24e07a7b1ca7abcc675e
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-12-08 15:20:05 +0100
+
+    Bump version to 1.8.1
+
+ configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 3104d4ed1c0c3dde22f44631d394492b6bc4f32b
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-12-08 15:19:59 +0100
+
+    Update NEWS
+
+ NEWS | 3 +++
+ 1 file changed, 3 insertions(+)
+
+commit b8498d619db8a83ec3b5d16e222e6ea84babf7a3
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-12-08 11:44:50 +0100
+
+    Update documentation for Mac OS X keychain usage.
+    
+    The example was provided by John Labovitz (thank you!)
+
+ doc/msmtp.1    |  7 ++++---
+ doc/msmtp.texi | 10 ++++++----
+ 2 files changed, 10 insertions(+), 7 deletions(-)
+
+commit ec043e5375d0ecd5ab987e53d0ebfecfc1de0858
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-12-08 11:22:52 +0100
+
+    Fix handling of GNUTLS_E_AGAIN in tls.c, for TLS 1.3 support.
+    
+    GNUTLS_E_AGAIN was never handled correctly, but since GnuTLS never actually
+    returned that code before GnuTLS 3.6.x with TLS 1.3, this was never a problem.
+    
+    Reported and analyzed by Florian Pritz (thank you!)
+
+ src/tls.c | 36 ++++++++++++++++++------------------
+ 1 file changed, 18 insertions(+), 18 deletions(-)
+
+commit ad3424b8135314a4c536cbaed0e5ee323d5cbfce
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-09-04 20:07:10 +0200
+
+    Bump version to 1.8.0.
+
+ configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 1f86751a3b3fafd7cbcb959264ddb3c964442206
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-09-04 20:05:02 +0200
+
+    Update NEWS.
+
+ NEWS | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+commit b9044064349d92da67190211a46094d7ec63d8b1
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-30 10:05:49 +0200
+
+    time(NULL) cannot fail, so remove some unnecessary error handling
+
+ src/msmtp.c |  9 +--------
+ src/tls.c   | 14 ++------------
+ 2 files changed, 3 insertions(+), 20 deletions(-)
+
+commit 7fc99d50710d343a4e9e956adc44f2782f1ac0d4
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-30 10:01:11 +0200
+
+    Update german translation.
+
+ po/de.po | 356 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-----------------------------------------------------------------------------------
+ 1 file changed, 185 insertions(+), 171 deletions(-)
+
+commit 417f347518e8db1f34abea0399909d09ce9dcc8b
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-30 09:57:15 +0200
+
+    Update vim syntax file for msmtprc
+
+ scripts/vim/msmtp.vim | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 0c931dfec8268b488cf713f3e68c8c89828450d8
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-30 09:53:53 +0200
+
+    Add new logfile_time_format command and corresponding option.
+
+ doc/msmtp.1    |  9 ++++++++-
+ doc/msmtp.texi | 14 +++++++++++++-
+ src/conf.c     | 23 +++++++++++++++++++++++
+ src/conf.h     |  2 ++
+ src/msmtp.c    | 57 +++++++++++++++++++++++++++++++++++++++++----------------
+ 5 files changed, 87 insertions(+), 18 deletions(-)
+
+commit b4a044a3d10e3a33863deb228ed5396c882ce5b7
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-27 19:23:29 +0200
+
+    Disable msmtpd on Windows by default
+
+ configure.ac | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+commit 076fa3765992d619f62235d1d84f675847cec2ee
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-25 22:30:09 +0200
+
+    Add note about libraries to README
+
+ README | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
+commit 25712b4d79387792d3ec5cac7ae8b7dbd8bc6343
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-22 08:08:50 +0200
+
+    Fix memory leak in msmtp_read_headers()
+
+ src/msmtp.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit cda0755629cf662aae8f4de41727ceda3d932b00
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-21 08:44:48 +0200
+
+    Remove support for systems lacking vasprintf().
+
+ NEWS         |  3 ++-
+ configure.ac |  2 +-
+ src/xalloc.c | 20 +-------------------
+ 3 files changed, 4 insertions(+), 21 deletions(-)
+
+commit 52993a4ae17e80990c221aff0f37c8506262fe9d
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-21 08:38:45 +0200
+
+    Update german translation
+
+ po/de.po | 543 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++------------------------------------------------------------------------------------
+ 1 file changed, 279 insertions(+), 264 deletions(-)
+
+commit df22dccf9d1af06fcd09dfdd0d6a38e1372dd5e8
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-21 08:38:02 +0200
+
+    passwordeval: do not require terminating newline anymore, and translate error messages
+
+ src/conf.c | 14 ++++++++------
+ 1 file changed, 8 insertions(+), 6 deletions(-)
+
+commit 87f637802b0a14d8161622fa1007d7896191fd03
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-20 21:22:03 +0200
+
+    Bump version to 1.8.0rc1.
+
+ configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit e9286ec9ceb6bcebd37f656b02ad2e15564d2162
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-20 21:21:38 +0200
+
+    Update NEWS.
+
+ NEWS | 2 ++
+ 1 file changed, 2 insertions(+)
+
+commit 9534ed2729a8d4dada87bc82b9b4161f1d080516
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-20 20:07:04 +0200
+
+    Mark CRAM-MD5 as obsolete and insecure, and do not choose it automatically anymore
+
+ NEWS           |  4 +++-
+ doc/msmtp.1    |  3 ++-
+ doc/msmtp.texi |  6 +++---
+ src/smtp.c     | 40 ++++++++++++++++++++++++----------------
+ 4 files changed, 32 insertions(+), 21 deletions(-)
+
+commit 4415145286760768257c78100c62a3035447222d
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-20 08:22:23 +0200
+
+    Fix usage of '@' in texinfo documentation example
+
+ doc/msmtp.texi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit c5cddae2e0d5f37802209354357c3ab7e751afbf
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-19 14:46:50 +0200
+
+    Update the system-wide config example to always use TLS
+
+ doc/msmtp.texi             | 18 ++++++++++--------
+ doc/msmtprc-system.example | 16 +++++++++-------
+ 2 files changed, 19 insertions(+), 15 deletions(-)
+
+commit a490c4deda6a7e644d6b61b106fb6da7e8b8d120
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-19 14:37:03 +0200
+
+    Improve NEWS
+
+ NEWS | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
+
+commit bc3420cdc948a80039c9ca356a3e185b7f5f29ec
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-18 22:53:37 +0200
+
+    msmtpd: include netinet/in.h for *BSD
+
+ src/msmtpd.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+commit 4594dd58e9920f3979f5026e2feb347999f1c21c
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-18 22:44:10 +0200
+
+    Update README
+
+ README | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 7c86935013e6e3905100ee1ce297ea096bd6cbc7
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-18 22:41:41 +0200
+
+    Update gettext files
+
+ ABOUT-NLS            |  4 ----
+ po/Makefile.in.in    | 26 +++++++++++++++++---------
+ po/Makevars.template |  6 ++++++
+ po/Rules-quot        |  4 ++--
+ 4 files changed, 25 insertions(+), 15 deletions(-)
+
+commit fcfb9607aaa31902fc7c24a4e083131f39d5efd0
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-18 22:34:35 +0200
+
+    msmtpd: print msmtp version when --version is given
+
+ src/msmtpd.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+commit 2fb2409dcaacde7be3db373b625b95a39bd509de
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-18 22:32:36 +0200
+
+    msmtpd: enable by default
+
+ NEWS         | 4 ++++
+ configure.ac | 4 ++--
+ 2 files changed, 6 insertions(+), 2 deletions(-)
+
+commit 1644b42f264c57e4365ef2173c8ffb80b6a00912
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-18 22:25:57 +0200
+
+    Remove support for DJGPP (was last used ages ago).
+
+ src/msmtp.c | 18 +++++-------------
+ src/net.c   |  2 +-
+ src/tools.c | 32 ++++----------------------------
+ 3 files changed, 10 insertions(+), 42 deletions(-)
+
+commit 0d8be2a35f0c7757d1f423e2d21f042626fec60e
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-18 22:12:25 +0200
+
+    Switch from libidn to libidn2
+
+ NEWS            | 2 ++
+ configure.ac    | 2 +-
+ src/Makefile.am | 4 ++--
+ src/net.c       | 4 ++--
+ src/tls.c       | 6 +++---
+ 5 files changed, 10 insertions(+), 8 deletions(-)
+
+commit d99f70d15b374d75a520aa63c80786c37cf500e9
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-18 21:58:14 +0200
+
+    Disable GNU SASL support by default since it is unnecessary most of the time
+
+ NEWS         | 3 +++
+ configure.ac | 6 +++---
+ 2 files changed, 6 insertions(+), 3 deletions(-)
+
+commit 20bb5e0a51102168691d2afea7c0d116e4fb9cb2
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-18 21:41:50 +0200
+
+    Discourage use of OpenSSL; recommend GnuTLS.
+
+ NEWS         |  4 ++++
+ configure.ac | 33 +++++++--------------------------
+ 2 files changed, 11 insertions(+), 26 deletions(-)
+
+commit f13e0cf553ff2ac3450e17c22500e81e58f72243
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-18 21:31:55 +0200
+
+    Remove Debian package name hints from configure.ac
+    
+    It does not make sense to keep them current and we should not have distribution
+    bias in configure.ac.
+
+ configure.ac | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+commit e7713c1861f16e0c6f3e8d0082ec27de7bdeb024
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-18 21:02:05 +0200
+
+    msmtpd: tweak buffer sizes, to be consistent with msmtp and mpop
+
+ src/msmtpd.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit f35dffee79a0027c67eb579c10b6c74765ea0c94
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-18 16:56:26 +0200
+
+    msmtpd: improve memory usage and remove limitation on number of recipients
+
+ src/msmtpd.c | 57 ++++++++++++++++++++++++++++++++++-----------------------
+ 1 file changed, 34 insertions(+), 23 deletions(-)
+
+commit 52dc298565de4d63db8d7dc265f444c41f85afa4
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-14 20:33:54 +0200
+
+    msmtpd: add start-stop-daemon example to documentation
+
+ doc/msmtp.texi |  8 ++++++++
+ doc/msmtpd.1   | 11 +++++++++++
+ 2 files changed, 19 insertions(+)
+
+commit 167f57080e24773a5336643ca9e0d6365dee4909
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-14 20:28:14 +0200
+
+    msmtpd: ignore SIGPIPE because we want to handle this error ourselves
+
+ src/msmtpd.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+commit 65c81b414c5ce2329515c4d0bc2e6f484ef5fdc6
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-14 10:07:21 +0200
+
+    msmtpd: use exit codes according to LSB init script recommendations
+    
+    This is recommended by the freedesktop.org new-style daemon recommendations.
+
+ src/msmtpd.c | 27 ++++++++++++++++-----------
+ 1 file changed, 16 insertions(+), 11 deletions(-)
+
+commit d741a7e913cb7a250395e37d97e7b45e8116dfb6
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-14 09:55:30 +0200
+
+    msmtpd: improve signal handling
+
+ src/msmtpd.c | 13 ++++++++++---
+ 1 file changed, 10 insertions(+), 3 deletions(-)
+
+commit e7660138673b46321b87675ad202f6f7f5f46b7b
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-14 09:43:53 +0200
+
+    msmtpd: call signal outside of loop so that we only do it once
+
+ src/msmtpd.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit be550dc27dd7a02d73bf91ddf89cc8c5c82e380b
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-14 09:27:34 +0200
+
+    msmtpd: support C89 compilers
+
+ src/msmtpd.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+commit efad5819c0b7f90098b9847d44222f81e371db51
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-14 09:24:56 +0200
+
+    msmtpd: allow spaces before mail address in MAIL FROM and RCPT TO
+
+ src/msmtpd.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+commit 3e55e3c89865d68c59d6b2fa02edb7be103c4f90
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-14 00:37:57 +0200
+
+    msmtpd: properly clean up child processes
+
+ src/msmtpd.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+commit e0bc975fbfb8b26a6dfaac87ebc64d3f37ef1e36
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-13 20:46:56 +0200
+
+    Add msmtpd, a minimal SMTP server, currently experimental.
+
+ configure.ac    |   7 +++
+ doc/Makefile.am |   3 ++
+ doc/msmtp.texi  |  39 +++++++++++++++
+ doc/msmtpd.1    |  48 ++++++++++++++++++
+ src/Makefile.am |   7 ++-
+ src/msmtpd.c    | 456 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 6 files changed, 559 insertions(+), 1 deletion(-)
+
+commit 09a1cb457a0a9986471ded779aaabfbe7ac1d319
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-07 14:16:05 +0200
+
+    Do not use getservbyname(). It offers no benefit.
+
+ configure.ac |  2 +-
+ src/msmtp.c  | 33 ---------------------------------
+ 2 files changed, 1 insertion(+), 34 deletions(-)
+
+commit ed32c31da42b730b1e49033328d13d8d6ae2a65a
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-07 13:50:49 +0200
+
+    Remove support for systems that lack mkstemp() and/or tmpfile()
+
+ configure.ac |   2 +-
+ src/msmtp.c  |  34 +++++++++++++++---------------
+ src/tools.c  | 196 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ src/tools.h  |  22 -------------------
+ 4 files changed, 18 insertions(+), 236 deletions(-)
+
+commit 80507c50174a72084326f84fbe1fdbf99cee2ed0
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-08-07 13:37:03 +0200
+
+    Fix building with ancient GnuTLS versions, e.g. on Ubuntu 14.04
+
+ src/tls.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+commit 86e244b2544f98821d98729b1799f2bb5b03a591
+Author: Roman Bogorodskiy <bogorodskiy@gmail.com>
+Date:   2018-06-29 21:54:28 +0400
+
+    Fix build on FreeBSD
+    
+    Build on FreeBSD fails with:
+    
+      CC       net.o
+    net.c:317:25: error: variable has incomplete type 'struct sockaddr_in6'
+        struct sockaddr_in6 sa6;
+                            ^
+    net.c:317:12: note: forward declaration of 'struct sockaddr_in6'
+        struct sockaddr_in6 sa6;
+               ^
+    net.c:318:24: error: variable has incomplete type 'struct sockaddr_in'
+        struct sockaddr_in sa4;
+                           ^
+    net.c:318:12: note: forward declaration of 'struct sockaddr_in'
+        struct sockaddr_in sa4;
+               ^
+    2 errors generated.
+    
+    Need to include <netinet/in.h> to fix that.
+
+ configure.ac | 2 +-
+ src/net.c    | 3 +++
+ 2 files changed, 4 insertions(+), 1 deletion(-)
+
+commit fdc578cc0f47979167f67c174e9341ed5e7c607f
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-06-28 15:38:19 +0200
+
+    Bump version to 1.6.8.
+
+ configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 33426d567cc7bc63e72426c6baeaff639dd6814a
+Author: Richard Genoud <richard.genoud@gmail.com>
+Date:   2018-06-28 15:28:28 +0200
+
+    Update french translation
+
+ po/fr.po | 488 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++------------------------------------------------------------------------------------
+ 1 file changed, 251 insertions(+), 237 deletions(-)
+
+commit fff0ffd66ef08324657d525108ae5352c39dded2
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-06-27 13:11:19 +0200
+
+    Fix minor problems in man page (taken from Debian patch)
+
+ doc/msmtp.1 | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 9709d9d37e650b920e5f5865024723e817734adc
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-06-27 11:58:44 +0200
+
+    Update NEWS
+
+ NEWS | 1 +
+ 1 file changed, 1 insertion(+)
+
+commit 606472e2065a0fc3d86224d8fe2718ecc3854edb
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-06-27 09:51:27 +0200
+
+    gnutls: avoid compiler warning by using a newer API
+
+ src/tls.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 81cd34625e993408fa67a6339446836fd66745de
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-06-27 09:48:55 +0200
+
+    gnutls: enable SNI to get the right cert from servers using virtual hosting
+
+ src/tls.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit d89fed58af2fb73da89ef0fe8807cd9ffc8668f7
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-06-26 22:48:44 +0200
+
+    Fix spelling of 'occurrence' and 'occurred'.
+
+ po/de.po    | 2 +-
+ po/fr.po    | 2 +-
+ po/pt_BR.po | 2 +-
+ src/conf.c  | 2 +-
+ src/msmtp.c | 6 +++---
+ src/smtp.h  | 2 +-
+ src/tls.c   | 2 +-
+ src/tools.h | 2 +-
+ 8 files changed, 10 insertions(+), 10 deletions(-)
+
+commit efd42654abafbbbe21e265a5fc4543ec3abb689c
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-06-26 13:28:59 +0200
+
+    Update NEWS
+
+ NEWS | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+commit 1bda18fd310d4ec8645d5d6c47a1872b1dbe38b0
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-06-26 13:18:21 +0200
+
+    Update german translation.
+
+ po/de.po | 467 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++------------------------------------------------------------------------------------
+ 1 file changed, 240 insertions(+), 227 deletions(-)
+
+commit 18682a988edc9b6ef24d5f40c22cfbde79a58cf1
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-06-26 12:49:29 +0200
+
+    Add new command source_ip and option --source-ip to bind to a specific IP.
+    
+    Should fix issue #2.
+
+ doc/msmtp.1    |  5 +++++
+ doc/msmtp.texi |  8 ++++++++
+ src/conf.c     | 23 ++++++++++++++++++++++-
+ src/conf.h     |  5 ++++-
+ src/msmtp.c    | 28 +++++++++++++++++++++++-----
+ src/net.c      | 69 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++---
+ src/net.h      |  5 ++++-
+ src/smtp.c     |  8 ++++----
+ src/smtp.h     |  5 +++--
+ 9 files changed, 139 insertions(+), 17 deletions(-)
+
+commit f0d4c3109491d5285439d1f5f155d22ff15a9663
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-06-26 12:39:31 +0200
+
+    Fix building for Windows >= 7 with latest MinGW
+
+ src/msmtp.c | 15 ++++++++++-----
+ src/net.c   | 12 ++++++------
+ src/tools.c | 20 ++++++++++----------
+ 3 files changed, 26 insertions(+), 21 deletions(-)
+
+commit 5d6dce96aae86bd7db857673a6f78f49edaef112
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-06-26 12:35:30 +0200
+
+    Documentation: move timeout doc after proxy doc
+
+ doc/msmtp.1    | 10 +++++-----
+ doc/msmtp.texi | 22 +++++++++++-----------
+ 2 files changed, 16 insertions(+), 16 deletions(-)
+
+commit a81673f957f0fc9172dd48c3eddba926a60d2eaa
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-06-25 09:55:36 +0200
+
+    Make config file lookup work for both msmtp and mpop.
+    
+    This fixes mpop issue #1, see mpop commit ed0d10dcaa6204d6854a84cde6c21bdb8ac1a0ca.
+
+ src/tools.c | 6 +++---
+ src/tools.h | 4 ++--
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+
+commit 5d44e2593ac9eaeb55878f37221b89cd1ab7d5fd
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-06-15 16:58:57 +0200
+
+    Bump version to 1.6.7
+
+ configure.ac | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 664aae8342777c0066db18313f56f650c92202d4
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-06-15 14:08:22 +0200
+
+    Update year in copyright message.
+
+ po/de.po    |   6 ++--
+ po/fr.po    | 260 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-------------------------------------------------------------------------------------
+ src/msmtp.c |   2 +-
+ 3 files changed, 134 insertions(+), 134 deletions(-)
+
+commit d8421e3202475ff95ef22481a0634a00b3f1eae7
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-06-15 14:06:21 +0200
+
+    Update NEWS.
+
+ NEWS | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
+commit a41588724f01ea25399a502258c3c02164f7ac9a
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-06-15 13:28:13 +0200
+
+    Update german translation.
+
+ po/de.po | 1054 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++--------------------------------------------------------------------------------------------------
+ 1 file changed, 456 insertions(+), 598 deletions(-)
+
+commit af2f409da5c2659989f2a1520cac777f738226bb
+Author: Mart <mart@martlubbers.net>
+Date:   2018-06-13 22:27:28 +0200
+
+    Implement the XDG base spec, to allow config file $XDG_CONFIG_HOME/msmtp/config.
+    
+    $XDG_CONFIG_HOME/msmtp/config will be used if it exists and ~/.msmtprc does not exist.
+    Otherwise, ~/.msmtprc is used.
+
+ doc/msmtp.1    | 10 ++++++----
+ doc/msmtp.texi | 12 ++++++------
+ src/msmtp.c    | 12 +++---------
+ src/tools.c    | 37 +++++++++++++++++++++++++++++++++++++
+ src/tools.h    | 14 +++++++++++++-
+ 5 files changed, 65 insertions(+), 20 deletions(-)
+
+commit 5c1acb25eaba6678c775ccd07ebed30cd2551bd0
+Author: Richard Genoud <richard.genoud@gmail.com>
+Date:   2018-06-13 14:10:02 +0200
+
+    add fr_FR locale
+    
+    Signed-off-by: Richard Genoud <richard.genoud@gmail.com>
+
+ po/LINGUAS |    1 +
+ po/fr.po   | 1695 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 1696 insertions(+)
+
+commit 861325dd0b73abc6f39de0bc502063dd9e56ee9d
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-06-12 20:37:22 +0200
+
+    Fix typo in documentation.
+
+ doc/msmtp.1    | 4 ++--
+ doc/msmtp.texi | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+commit 1356963ad9aca12fad86c8b2dd320f64e306c168
+Author: Martin Lambers <marlam@marlam.de>
+Date:   2018-06-12 20:00:01 +0200
+
+    Update homepage and contact information.
+
+ ABOUT-NLS                                  | 2 +-
+ AUTHORS                                    | 2 +-
+ README                                     | 2 +-
+ configure.ac                               | 2 +-
+ scripts/find_alias/find_alias_for_msmtp.sh | 3 ++-
+ 5 files changed, 6 insertions(+), 5 deletions(-)
+
+commit cb30033f1daa187d3543760bf57340b079382e81
+Author: Konst Mayer <cdlscpmv@gmail.com>
+Date:   2018-06-11 20:54:16 +0200
+
+    Windows: implement timeout on connect()
+
+ src/net.c | 54 ++++++++++++++++++++++++++++++++++++++++++------------
+ 1 file changed, 42 insertions(+), 12 deletions(-)
+
+commit 1542baa0264790281a889f139d84200a2708620d
+Author: Konst Mayer <cdlscpmv@gmail.com>
+Date:   2018-06-11 20:51:23 +0200
+
+    Windows: properly close socket on errors
+
+ src/net.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit d8280993e3c5d163178a03aba0b4b51f7526044d
+Author: Konst Mayer <cdlscpmv@gmail.com>
+Date:   2018-06-11 20:49:34 +0200
+
+    Windows: fix send/receive timeout handling
+
+ src/net.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit 53f3b0b45739d1e1f0ce3ec464a2318611a107f5
+Author: Jan Fuchs <fuky@asu.cas.cz>
+Date:   2018-06-11 20:36:11 +0200
+
+    Fix command line handling of SHA256 TLS fingerprints.
+    
+    See also Debian bug 888602.
+
+ src/msmtp.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 0665692b6807342bbd2de3fbc2e22e9ec2c1dbf2
+Author: Roger Pau Monne <roger.pau@citrix.com>
+Date:   2017-04-03 10:31:37 +0200
+
+    Ignore SIGPIPE; we handle write errors where they occur.
+    
+    This fixes problems with killed msmtp processes at least on Mac OS X.
+
+ configure.ac | 4 ++--
+ src/msmtp.c  | 9 ++++++++-
+ 2 files changed, 10 insertions(+), 3 deletions(-)
+
 commit 2fa66d2b7fd417b024f48addb2dae04324751875
 Author: Martin Lambers <marlam@marlam.de>
 Date:   2016-11-14 20:59:18 +0100
@@ -215,9 +1413,9 @@ Date:   2015-03-12 15:59:19 +0100
 
     Update msmtpq scripts.
 
- scripts/msmtpq/README.msmtpq |  82 +++++++++++++++++++++++++++++++++++++++++++++++++++++++---------------------
+ scripts/msmtpq/README.msmtpq |  82 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++----------------------
  scripts/msmtpq/msmtp-queue   |   2 +-
- scripts/msmtpq/msmtpq        | 106 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++------------------------------
+ scripts/msmtpq/msmtpq        | 106 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++--------------------------------
  3 files changed, 135 insertions(+), 55 deletions(-)
 
 commit f52acb765262b05e4b1c9639ff08f4265cb71e3e
@@ -351,8 +1549,8 @@ Date:   2014-12-28 14:33:27 +0100
 
     Improve man page and manual.
 
- doc/msmtp.1    | 502 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++------------------------------------------------------
- doc/msmtp.texi | 142 ++++++++++++++++----------------
+ doc/msmtp.1    | 502 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++---------------------------------------------------------------------------------
+ doc/msmtp.texi | 142 ++++++++++++++++++++++++-----------------------
  2 files changed, 333 insertions(+), 311 deletions(-)
 
 commit ef617b9bc32e1a5900e0db40500d2f05846d99ca
@@ -361,7 +1559,7 @@ Date:   2014-12-28 09:36:31 +0100
 
     Update the manual. Rework the TLS and Authentication sections.
 
- doc/msmtp.texi | 632 +++++++++++++++++++++++++++++++++++++++++++++++++---------------------------------------------------------------
+ doc/msmtp.texi | 632 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++----------------------------------------------------------------------------------------------
  1 file changed, 277 insertions(+), 355 deletions(-)
 
 commit c370cdf1dbdeeda804af36a7b6239c1ccc61f013
@@ -370,9 +1568,9 @@ Date:   2014-12-25 15:47:36 +0100
 
     Update configuration file example
 
- doc/msmtp.1              | 127 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++---------
- doc/msmtp.texi           | 125 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++----------------------------
- doc/msmtprc-user.example |  75 ++++++++++++++++++++++++++++++++++++++++++++++++++++--------
+ doc/msmtp.1              | 127 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-----------
+ doc/msmtp.texi           | 125 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++----------------------------------
+ doc/msmtprc-user.example |  75 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++----------
  3 files changed, 272 insertions(+), 55 deletions(-)
 
 commit 482efde0a0f6b0e6d0e1adb51a768a6ed52a3ef9
@@ -521,13 +1719,13 @@ Date:   2014-12-09 21:02:00 +0100
 
     Allow password management with secret-tool from libsecret.
 
- NEWS                                         |   4 +-
- doc/msmtp.1                                  |  16 +++++---
- doc/msmtp.texi                               |  16 +++++---
- scripts/Makefile.am                          |   4 +-
+ NEWS                                         |   4 +++-
+ doc/msmtp.1                                  |  16 +++++++++----
+ doc/msmtp.texi                               |  16 +++++++++----
+ scripts/Makefile.am                          |   4 +---
  scripts/msmtp-gnome-tool/README              |   1 -
- scripts/msmtp-gnome-tool/msmtp-gnome-tool.py | 175 ----------------------------------------------------------------------------------
- src/msmtp.c                                  |  30 +++++++++++++-
+ scripts/msmtp-gnome-tool/msmtp-gnome-tool.py | 175 -----------------------------------------------------------------------------------------------------------------------------------------
+ src/msmtp.c                                  |  30 +++++++++++++++++++++++-
  7 files changed, 55 insertions(+), 191 deletions(-)
 
 commit 51a6e7c3e51907807b6055d85a7fccc6e2afc54b
@@ -550,11 +1748,11 @@ Date:   2014-12-09 20:13:38 +0100
     documented anymore.
 
  NEWS           |   2 ++
- doc/msmtp.1    |  11 +++++----
- doc/msmtp.texi |  20 ++++++++---------
- src/conf.c     |  69 +++++++++++++++++++++++++++++++++++++--------------------
- src/conf.h     |  48 ++++++++++++++++++++--------------------
- src/msmtp.c    | 136 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++----------------------------------------------
+ doc/msmtp.1    |  11 +++++------
+ doc/msmtp.texi |  20 ++++++++++----------
+ src/conf.c     |  69 +++++++++++++++++++++++++++++++++++++++++++++------------------------
+ src/conf.h     |  48 ++++++++++++++++++++++++------------------------
+ src/msmtp.c    | 136 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++--------------------------------------------------------
  6 files changed, 166 insertions(+), 120 deletions(-)
 
 commit 595280fd8314bcfb4db18e1aa92e4454939404b8
@@ -572,13 +1770,13 @@ Date:   2014-12-09 19:51:36 +0100
 
     Add new commands add_missing_from_header and add_missing_date_header, and corresponding options.
 
- NEWS           |   3 +-
- configure.ac   |   3 +-
- doc/msmtp.1    |  24 +++++++++--
- doc/msmtp.texi |  30 ++++++++++++--
- src/conf.c     |  62 ++++++++++++++++++++++++++--
- src/conf.h     |  69 ++++++++++++++++---------------
- src/msmtp.c    | 248 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-------------------------------------------------
+ NEWS           |   3 ++-
+ configure.ac   |   3 ++-
+ doc/msmtp.1    |  24 ++++++++++++++---
+ doc/msmtp.texi |  30 ++++++++++++++++++---
+ src/conf.c     |  62 +++++++++++++++++++++++++++++++++++++++---
+ src/conf.h     |  69 +++++++++++++++++++++++++----------------------
+ src/msmtp.c    | 248 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-------------------------------------------------------------------------
  7 files changed, 285 insertions(+), 154 deletions(-)
 
 commit b347dd5563f7eb4d809d8495d8437630731411af
