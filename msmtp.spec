@@ -6,14 +6,15 @@
 #
 Name     : msmtp
 Version  : 1.8.3
-Release  : 21
+Release  : 22
 URL      : https://marlam.de/msmtp/releases/msmtp-1.8.3.tar.xz
 Source0  : https://marlam.de/msmtp/releases/msmtp-1.8.3.tar.xz
-Source99 : https://marlam.de/msmtp/releases/msmtp-1.8.3.tar.xz.sig
+Source1 : https://marlam.de/msmtp/releases/msmtp-1.8.3.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-3.0
 Requires: msmtp-bin = %{version}-%{release}
+Requires: msmtp-info = %{version}-%{release}
 Requires: msmtp-license = %{version}-%{release}
 Requires: msmtp-locales = %{version}-%{release}
 Requires: msmtp-man = %{version}-%{release}
@@ -29,19 +30,17 @@ In the default mode, it transmits a mail to an SMTP server.
 Summary: bin components for the msmtp package.
 Group: Binaries
 Requires: msmtp-license = %{version}-%{release}
-Requires: msmtp-man = %{version}-%{release}
 
 %description bin
 bin components for the msmtp package.
 
 
-%package doc
-Summary: doc components for the msmtp package.
-Group: Documentation
-Requires: msmtp-man = %{version}-%{release}
+%package info
+Summary: info components for the msmtp package.
+Group: Default
 
-%description doc
-doc components for the msmtp package.
+%description info
+info components for the msmtp package.
 
 
 %package license
@@ -70,32 +69,34 @@ man components for the msmtp package.
 
 %prep
 %setup -q -n msmtp-1.8.3
+cd %{_builddir}/msmtp-1.8.3
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1550167994
-export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
-export CXXFLAGS="$CXXFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1573773935
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
+export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
 %configure --disable-static
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1550167994
+export SOURCE_DATE_EPOCH=1573773935
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/msmtp
-cp COPYING %{buildroot}/usr/share/package-licenses/msmtp/COPYING
+cp %{_builddir}/msmtp-1.8.3/COPYING %{buildroot}/usr/share/package-licenses/msmtp/8624bcdae55baeef00cd11d5dfcfa60f68710a02
 %make_install
 %find_lang msmtp
 ## install_append content
@@ -111,13 +112,13 @@ ln -s msmtp %{buildroot}%{_bindir}/sendmail
 /usr/bin/msmtpd
 /usr/bin/sendmail
 
-%files doc
+%files info
 %defattr(0644,root,root,0755)
-%doc /usr/share/info/*
+/usr/share/info/msmtp.info
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/msmtp/COPYING
+/usr/share/package-licenses/msmtp/8624bcdae55baeef00cd11d5dfcfa60f68710a02
 
 %files man
 %defattr(0644,root,root,0755)
