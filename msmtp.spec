@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x03A2A4AB1E32FD34 (marlam@marlam.de)
 #
 Name     : msmtp
-Version  : 1.8.3
-Release  : 22
-URL      : https://marlam.de/msmtp/releases/msmtp-1.8.3.tar.xz
-Source0  : https://marlam.de/msmtp/releases/msmtp-1.8.3.tar.xz
-Source1 : https://marlam.de/msmtp/releases/msmtp-1.8.3.tar.xz.sig
+Version  : 1.8.7
+Release  : 23
+URL      : https://marlam.de/msmtp/releases/msmtp-1.8.7.tar.xz
+Source0  : https://marlam.de/msmtp/releases/msmtp-1.8.7.tar.xz
+Source1  : https://marlam.de/msmtp/releases/msmtp-1.8.7.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-3.0
@@ -68,19 +68,19 @@ man components for the msmtp package.
 
 
 %prep
-%setup -q -n msmtp-1.8.3
-cd %{_builddir}/msmtp-1.8.3
+%setup -q -n msmtp-1.8.7
+cd %{_builddir}/msmtp-1.8.7
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1573773935
+export SOURCE_DATE_EPOCH=1586366437
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FCFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
 export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
 %configure --disable-static
 make  %{?_smp_mflags}
@@ -93,10 +93,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1573773935
+export SOURCE_DATE_EPOCH=1586366437
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/msmtp
-cp %{_builddir}/msmtp-1.8.3/COPYING %{buildroot}/usr/share/package-licenses/msmtp/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/msmtp-1.8.7/COPYING %{buildroot}/usr/share/package-licenses/msmtp/8624bcdae55baeef00cd11d5dfcfa60f68710a02
 %make_install
 %find_lang msmtp
 ## install_append content
