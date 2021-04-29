@@ -6,7 +6,7 @@
 #
 Name     : msmtp
 Version  : 1.8.7
-Release  : 23
+Release  : 24
 URL      : https://marlam.de/msmtp/releases/msmtp-1.8.7.tar.xz
 Source0  : https://marlam.de/msmtp/releases/msmtp-1.8.7.tar.xz
 Source1  : https://marlam.de/msmtp/releases/msmtp-1.8.7.tar.xz.sig
@@ -78,10 +78,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
 export SOURCE_DATE_EPOCH=1586366437
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FCFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
-export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
+export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
+export FCFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
+export FFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
+export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
 %configure --disable-static
 make  %{?_smp_mflags}
 
