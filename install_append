@@ -1,1 +1,1 @@
-ln -s msmtp %{buildroot}%{_bindir}/sendmail
+ln -s msmtp %{buildroot}/usr/bin/sendmail
