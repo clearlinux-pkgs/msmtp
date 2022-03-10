@@ -1,5 +1,6 @@
 Configure miss: 32-bit host C ABI
 Configure miss: CFLocaleCopyPreferredLanguages
 Configure miss: SecKeychainGetVersion
+Configure miss: gcc options needed to detect all undeclared functions
 Configure miss: libsecret-1
 Configure miss: whether libidn is needed for IDN support
