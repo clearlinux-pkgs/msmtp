@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x03A2A4AB1E32FD34 (marlam@marlam.de)
 #
 Name     : msmtp
-Version  : 1.8.20
-Release  : 27
-URL      : https://marlam.de/msmtp/releases/msmtp-1.8.20.tar.xz
-Source0  : https://marlam.de/msmtp/releases/msmtp-1.8.20.tar.xz
-Source1  : https://marlam.de/msmtp/releases/msmtp-1.8.20.tar.xz.sig
+Version  : 1.8.22
+Release  : 28
+URL      : https://marlam.de/msmtp/releases/msmtp-1.8.22.tar.xz
+Source0  : https://marlam.de/msmtp/releases/msmtp-1.8.22.tar.xz
+Source1  : https://marlam.de/msmtp/releases/msmtp-1.8.22.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-3.0
@@ -68,15 +68,15 @@ man components for the msmtp package.
 
 
 %prep
-%setup -q -n msmtp-1.8.20
-cd %{_builddir}/msmtp-1.8.20
+%setup -q -n msmtp-1.8.22
+cd %{_builddir}/msmtp-1.8.22
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1652827433
+export SOURCE_DATE_EPOCH=1659977640
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
 export FCFLAGS="$FFLAGS -fno-lto -fstack-protector-strong -fzero-call-used-regs=used "
@@ -93,10 +93,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1652827433
+export SOURCE_DATE_EPOCH=1659977640
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/msmtp
-cp %{_builddir}/msmtp-1.8.20/COPYING %{buildroot}/usr/share/package-licenses/msmtp/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/msmtp-%{version}/COPYING %{buildroot}/usr/share/package-licenses/msmtp/8624bcdae55baeef00cd11d5dfcfa60f68710a02
 %make_install
 %find_lang msmtp
 ## install_append content
