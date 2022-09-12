@@ -6,7 +6,7 @@
 #
 Name     : msmtp
 Version  : 1.8.22
-Release  : 28
+Release  : 29
 URL      : https://marlam.de/msmtp/releases/msmtp-1.8.22.tar.xz
 Source0  : https://marlam.de/msmtp/releases/msmtp-1.8.22.tar.xz
 Source1  : https://marlam.de/msmtp/releases/msmtp-1.8.22.tar.xz.sig
