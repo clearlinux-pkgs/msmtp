@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x03A2A4AB1E32FD34 (marlam@marlam.de)
 #
 Name     : msmtp
-Version  : 1.8.22
-Release  : 30
-URL      : https://marlam.de/msmtp/releases/msmtp-1.8.22.tar.xz
-Source0  : https://marlam.de/msmtp/releases/msmtp-1.8.22.tar.xz
-Source1  : https://marlam.de/msmtp/releases/msmtp-1.8.22.tar.xz.sig
+Version  : 1.8.23
+Release  : 31
+URL      : https://marlam.de/msmtp/releases/msmtp-1.8.23.tar.xz
+Source0  : https://marlam.de/msmtp/releases/msmtp-1.8.23.tar.xz
+Source1  : https://marlam.de/msmtp/releases/msmtp-1.8.23.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-3.0
@@ -21,6 +21,9 @@ Requires: msmtp-man = %{version}-%{release}
 BuildRequires : pkgconfig(gnutls)
 BuildRequires : pkgconfig(libidn2)
 BuildRequires : pkgconfig(openssl)
+# Suppress stripping binaries
+%define __strip /bin/true
+%define debug_package %{nil}
 
 %description
 msmtp is an SMTP client.
@@ -68,20 +71,20 @@ man components for the msmtp package.
 
 
 %prep
-%setup -q -n msmtp-1.8.22
-cd %{_builddir}/msmtp-1.8.22
+%setup -q -n msmtp-1.8.23
+cd %{_builddir}/msmtp-1.8.23
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1664929019
+export SOURCE_DATE_EPOCH=1675114729
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -fno-lto "
-export FCFLAGS="$FFLAGS -fno-lto "
-export FFLAGS="$FFLAGS -fno-lto "
-export CXXFLAGS="$CXXFLAGS -fno-lto "
+export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CXXFLAGS="$CXXFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -93,7 +96,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1664929019
+export SOURCE_DATE_EPOCH=1675114729
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/msmtp
 cp %{_builddir}/msmtp-%{version}/COPYING %{buildroot}/usr/share/package-licenses/msmtp/8624bcdae55baeef00cd11d5dfcfa60f68710a02 || :
